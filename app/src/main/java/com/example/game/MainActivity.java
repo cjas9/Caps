@@ -1,6 +1,8 @@
 package com.example.game;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.app.ActionBar;
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
@@ -14,6 +16,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import com.muddzdev.styleabletoast.StyleableToast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -23,9 +28,9 @@ public class MainActivity extends AppCompatActivity {
     private String storedAnswer;
     private int Score = 0;
     private int qNum = 1;
-    private final EditText answerView = findViewById(R.id.answer);
-    private final TextView quesView = findViewById(R.id.question);
-    private final TextView quesNumber = findViewById(R.id.qNum);
+    EditText answerView;
+    TextView quesView;
+    TextView quesNumber;
     private String log = " ";
 
     private float acelVal;
@@ -37,7 +42,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        this.tg = new ToneGenerator(AudioManager.STREAM_ALARM, 90);
+        this.setTitle("");
+
+
+        this.tg = new ToneGenerator(AudioManager.STREAM_ALARM, 50);
         SensorManager sm = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
         sm.registerListener(sensorListener, sm.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
 
@@ -72,11 +80,12 @@ public class MainActivity extends AppCompatActivity {
     }*/
 
     public void onDone(View v) {
+        answerView = findViewById(R.id.answer);
         String userAnswer = answerView.getText().toString();
 
         if (storedAnswer.equalsIgnoreCase(userAnswer)) {
             Score++;
-            tg.startTone(ToneGenerator.TONE_CDMA_ANSWER, 200);
+            tg.startTone(ToneGenerator.TONE_CDMA_CALLDROP_LITE, 200);
 
         }
 
@@ -85,19 +94,20 @@ public class MainActivity extends AppCompatActivity {
         String newAnswer = hint.substring(position_OfNewLine + 1);
 
         Context context = getApplicationContext();
-        CharSequence text = "The answer is either " + storedAnswer + " or " + newAnswer;
-        int duration = Toast.LENGTH_LONG;
+        String text = "The answer is either " + storedAnswer + " or " + newAnswer;
+        //int duration = Toast.LENGTH_LONG;
 
         if (userAnswer.equals("?")) {
-            Toast label = Toast.makeText(context, text, duration);
+            StyleableToast label = StyleableToast.makeText(context, text, Toast.LENGTH_LONG,  R.style.custom_toast);
             label.show();
+
             answerView.setText("");
 
         } else {
             TextView logView = findViewById(R.id.log);
-            log = "\n" + "Q" + qNum + " " + Question + "\n" + "Your Answer: " + userAnswer + "\n" + "Correct Answer: " + storedAnswer + "\n" + log + "\n";
+            log = "\n" + "Q" + qNum + ": " + Question + "\n" + "Your Answer: " + userAnswer + "\n" + "Correct Answer: " + storedAnswer + "\n" + log + "\n";
             logView.setText(log);
-            tg.startTone(ToneGenerator.TONE_CDMA_ALERT_CALL_GUARD, 200);
+            tg.startTone(ToneGenerator.TONE_CDMA_ABBR_ALERT,  200);
         }
 
         if (!"?".equals(userAnswer)) {
@@ -105,8 +115,10 @@ public class MainActivity extends AppCompatActivity {
             int positionOfNewLine = call.indexOf("\n");
             Question = call.substring(0, positionOfNewLine);
             storedAnswer = call.substring(positionOfNewLine + 1);
+            quesView = findViewById(R.id.question);
             quesView.setText(Question);
             qNum++;
+            quesNumber = findViewById(R.id.qNum);
             quesNumber.setText("Q# " + qNum);
         }
 
@@ -122,9 +134,11 @@ public class MainActivity extends AppCompatActivity {
             quesNumber.setText("GAME OVER!");
             Button btn = findViewById(R.id.done);
             btn.setEnabled(false);
+            quesNumber = findViewById(R.id.qNum);
             quesView.setText("");
         }
 
+        answerView = findViewById(R.id.answer);
         answerView.setText("");
 
 
