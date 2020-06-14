@@ -6,27 +6,41 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-<TextView
-android:id="@+id/qNum"
-android:layout_width="150dp"
-android:layout_height="25dp"
-android:layout_marginTop="16dp"
-android:gravity="center"
-android:text="Q# 1"
-android:textSize="18sp"
-android:textStyle="bold"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintHorizontal_bias="0.5"
-app:layout_constraintStart_toEndOf="@+id/score"
-app:layout_constraintTop_toTopOf="parent" />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/qNum"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
+        android:gravity="center"
+        android:text="@string/q_1"
+        android:textColor="#000000"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/score"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/score"
-        android:layout_width="150dp"
-        android:layout_height="25dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
+        android:fontFamily="cursive"
         android:gravity="center"
-        android:text="SCORE =  0"
+        android:text="@string/score"
+        android:textColor="#000000"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/qNum"
@@ -35,16 +49,19 @@ app:layout_constraintTop_toTopOf="parent" />
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-<TextView
-android:id="@+id/question"
-android:layout_width="409dp"
-android:layout_height="0dp"
-android:layout_marginTop="8dp"
-android:gravity="center"
-android:text="Question"
-app:layout_constraintEnd_toEndOf="parent"
-app:layout_constraintStart_toStartOf="parent"
-app:layout_constraintTop_toBottomOf="@+id/qNum" />
+    <TextView
+        android:id="@+id/question"
+        android:layout_width="409dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:text="@string/question"
+        android:textColor="#000000"
+        android:fontFamily="cursive"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/qNum" />
 
     <EditText
         android:id="@+id/answer"
@@ -53,46 +70,58 @@ app:layout_constraintTop_toBottomOf="@+id/qNum" />
         android:layout_marginStart="16dp"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="8dp"
+        android:layout_marginBottom="8dp"
         android:ems="10"
-        android:hint="Your Answer"
+        android:autofillHints="@string/user_answer"
+        android:hint="@string/user_answer"
         android:inputType="textPersonName"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView2"
         app:layout_constraintEnd_toStartOf="@+id/done"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/question" />
+        app:layout_constraintTop_toBottomOf="@+id/question"
+        app:layout_constraintVertical_bias="0.006" />
 
     <Button
         android:id="@+id/done"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_width="117dp"
+        android:layout_height="38dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
+        android:background="@drawable/custom_button"
         android:onClick="onDone"
-        android:text="done"
+        android:text="@string/done"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:fontFamily="cursive"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/answer"
         app:layout_constraintTop_toBottomOf="@+id/question" />
 
     <ScrollView
+        android:id="@+id/scrollView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
-        android:layout_marginTop="1dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/answer">
+        app:layout_constraintTop_toBottomOf="@+id/done">
 
         <TextView
             android:id="@+id/log"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:textColor="#000000"
+            android:fontFamily="cursive"
+            android:textSize="20sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/qNum" />

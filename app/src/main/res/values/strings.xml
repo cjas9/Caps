@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Game</string>
+    <string name="q_1">Q# 1</string>
+    <string name="score">SCORE = 0</string>
+    <string name="question">Question</string>
+    <string name="user_answer">Your Answer</string>
+    <string name="done">done</string>
 </resources>

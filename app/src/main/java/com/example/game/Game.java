@@ -6,8 +6,8 @@ import java.util.Map;
 import ca.roumani.i2c.Country;
 import ca.roumani.i2c.CountryDB;
 
-public class Game {
-    public CountryDB db;
+class Game {
+    private final CountryDB db;
 
     // class constructor
     public Game() {
@@ -25,7 +25,7 @@ public class Game {
         Map<String, Country> data = db.getData();
         Country ref = data.get(c);
         if (Math.random() < 0.5) {
-            return  "What is the capital of " + ref.getName() + "\n" + ref.getCapital();
+            return  "What is the capital of " + ref.getName() + "?" + "\n" + ref.getCapital();
         }
         else {
             return ref.getCapital() + " is the capital of?" + "\n" + ref.getName();
